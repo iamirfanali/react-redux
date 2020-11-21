@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import allReducers from './reducers';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css';
+
+// 1. ACTION -> Describes what we are going to do e.g Increment. It is descring not doing.
+// 2. REDUCER -> Describes how your actions transforms state to the next state.
+// 3. STORE -> Globalized State.
+// 4. DISPATCH -> Here we axecute the action.
+
+const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
